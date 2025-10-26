@@ -86,3 +86,19 @@ O sistema integra **coleta, transcrição, NLP e análise de tópicos**, gerando
 * numpy
 tqdm
 
+---
+
+## Instalação e Execução
+
+```bash
+# 1. Criar ambiente virtual
+python -m venv .venv
+
+# 2. Ativar ambiente
+.venv\Scripts\activate
+
+# 3. Instalar dependências
+pip install -r requirements.txt
+
+# 4. Executar pipeline completo
+run_all.bat
