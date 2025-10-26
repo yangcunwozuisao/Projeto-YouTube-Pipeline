@@ -1,6 +1,5 @@
 # Projeto-YouTube-Pipeline
 
-# Projeto YouTube Pipeline
 **Versão:** 1.6 – Atualizado em 26/10/2025  
 **Autores:** Danilo Ye, Daniel Zou, Igor Shirata Duarte  
 **Instituição:** Universidade Presbiteriana Mackenzie – FCI  
@@ -74,15 +73,16 @@ O sistema integra **coleta, transcrição, NLP e análise de tópicos**, gerando
 
 ---
 
-## 🔁 Fluxo Lógico do Pipeline
+## Principais Bibliotecas e Dependências
+* yt-dlp
+* openai-whisper
+* imageio-ffmpeg
+* transformers
+* torch
+* keybert
+* bertopic
+* pandas
+* scikit-learn
+* numpy
+tqdm
 
-```mermaid
-graph TD
-A[yt_collect_videos.py] --> B[step_eda.py]
-B --> C[step_filter.py]
-C --> D[asr_whisper.py]
-D --> E[nlp_stage.py]
-E --> F[topics_bertopic.py]
-F --> G[make_aggregates.py]
-G --> H[exports_bi.py]
-H --> I[Power BI Dashboard]
