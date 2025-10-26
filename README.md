@@ -14,70 +14,67 @@ O sistema integra **coleta, transcrição, NLP e análise de tópicos**, gerando
 
 ---
 
-## Estrutura Geral
 
----
-
-## ⚙️ Módulos Principais
+## ⚙️ Descrição dos Módulos Principais
 
 ### 🔹 1. Coleta de Dados
-| Script | Função | Saída |
-|--------|---------|-------|
-| `yt_collect_videos.py` | Coleta metadados de vídeos via **YouTube Data API v3** | `videos.csv` |
-| `yt_collect_comments.py` | Coleta comentários dos vídeos (autor, data, texto) | `comments.csv` |
+| Script | Descrição | Saída |
+|--------|------------|-------|
+| `yt_collect_videos.py` | Coleta metadados (título, canal, views, likes) via YouTube Data API v3 | `videos.csv` |
+| `yt_collect_comments.py` | Coleta comentários, autores e datas dos vídeos | `comments.csv` |
 
 ---
 
 ### 🔹 2. Pré-processamento e Filtragem
-| Script | Função | Saída |
-|--------|---------|-------|
-| `step_eda.py` | Realiza **análise exploratória de dados (EDA)** e limpeza de colunas | `videos_clean.csv` |
-| `step_filter.py` | Aplica filtros de duração ≥60s, idioma e duplicidade | `videos_clean_filtered.csv` |
+| Script | Descrição | Saída |
+|--------|------------|-------|
+| `step_eda.py` | Limpeza e análise exploratória (EDA) | `videos_clean.csv` |
+| `step_filter.py` | Filtragem por idioma, duração e duplicatas | `videos_clean_filtered.csv` |
 
 ---
 
 ### 🔹 3. Transcrição (ASR)
-| Script | Função | Saída |
-|--------|---------|-------|
-| `asr_whisper.py` | Transcreve áudios com **OpenAI Whisper (small/base)** | `transcripts.csv` |
-| `check_transcripts.py` | Verifica falhas ou trechos não transcritos | logs e mensagens no terminal |
+| Script | Descrição | Saída |
+|--------|------------|-------|
+| `asr_whisper.py` | Transcreve áudio com OpenAI Whisper (small/base) | `transcripts.csv` |
+| `check_transcripts.py` | Verifica falhas ou vazios na transcrição | Logs no terminal |
 
 ---
 
-### 🔹 4. Análise de Linguagem Natural (NLP)
-| Script | Função | Saída |
-|--------|---------|-------|
-| `nlp_stage.py` | Executa **KeyBERT** e **XLM-RoBERTa** para sentimento | `dataset_nlp.csv` |
-| `comments_sentiment.py` | Classifica sentimentos dos comentários do público | `comments_sentiment.csv` |
-| `brand_entity_extract.py` | Detecta marcas e entidades mencionadas (NER) | `dataset_brands.csv` |
+### 🔹 4. NLP e Análise Semântica
+| Script | Descrição | Saída |
+|--------|------------|-------|
+| `nlp_stage.py` | Extração de palavras-chave (KeyBERT) e sentimento (XLM-RoBERTa) | `dataset_nlp.csv` |
+| `comments_sentiment.py` | Classificação de sentimento dos comentários | `comments_sentiment.csv` |
+| `brand_entity_extract.py` | Detecção de marcas e entidades nomeadas (NER) | `dataset_brands.csv` |
 
 ---
 
 ### 🔹 5. Agrupamento de Tópicos
-| Script | Função | Saída |
-|--------|---------|-------|
-| `topics_bertopic.py` | Identifica padrões temáticos com **BERTopic** | `dataset_topics.csv` |
-| `topics_overview.csv` | Relatório sintético dos tópicos detectados | `topics_overview.csv` |
+| Script | Descrição | Saída |
+|--------|------------|-------|
+| `topics_bertopic.py` | Agrupamento temático com BERTopic (multilíngue) | `dataset_topics.csv` |
+| `topics_overview.csv` | Resumo dos tópicos e clusters gerados | `topics_overview.csv` |
 
 ---
 
-### 🔹 6. Consolidação e BI
-| Script | Função | Saída |
-|--------|---------|-------|
-| `make_aggregates.py` | Gera agregações (sentimento médio, volume) | `agg_channel.csv`, `agg_brand.csv` |
-| `exports_bi.py` | Cria tabelas fato e dimensão para Power BI | `bi_fato_videos.csv`, `bi_agg_channel.csv` |
+### 🔹 6. Consolidação e Business Intelligence
+| Script | Descrição | Saída |
+|--------|------------|-------|
+| `make_aggregates.py` | Calcula médias de sentimento por canal/marca | `agg_channel.csv` |
+| `exports_bi.py` | Cria tabelas fato e dimensão para Power BI | `bi_fato_videos.csv`, `bi_agg_channel.csv`, `bi_agg_brand.csv` |
 
 ---
 
-### 🔹 7. Automação e Controle
-| Arquivo | Função |
-|----------|---------|
-| `run_all.bat` | Executa o pipeline completo sequencialmente |
-| `requirements.txt` | Lista todas as dependências (`pip install -r requirements.txt`) |
+### 🔹 7. Automação e Execução
+| Arquivo | Descrição |
+|----------|-----------|
+| `run_all.bat` | Executa o pipeline completo sequencialmente e gera logs |
+| `requirements.txt` | Lista todas as dependências para instalação via `pip` |
 
 ---
 
-## 🔁 Fluxo Geral do Pipeline
+## 🔁 Fluxo Lógico do Pipeline
 
 ```mermaid
 graph TD
